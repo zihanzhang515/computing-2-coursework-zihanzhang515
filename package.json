@@ -1,0 +1,26 @@
+{
+  "name": "FindtheAirplane",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "web-app/server/server.js",
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.22.5",
+    "@babel/core": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "chai": "^4.3.7",
+    "docdash": "^1.2.0",
+    "mocha": "^9.2.2",
+    "sinon": "^15.1.2"
+  },
+  "dependencies": {
+    "assert": "^2.0.0",
+    "express": "^4.18.2",
+    "jsdoc": "^4.0.2",
+    "jslint": "^0.12.1",
+    "ramda": "^0.29.0",
+    "taffydb": "^2.7.3"
+  }
+}

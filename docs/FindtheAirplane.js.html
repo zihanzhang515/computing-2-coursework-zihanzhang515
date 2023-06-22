@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>FindtheAirplane.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="FindtheAirplane.html">FindtheAirplane</a><ul class='methods'><li data-type='method'><a href="FindtheAirplane.html#.canPlacePlane">canPlacePlane</a></li><li data-type='method'><a href="FindtheAirplane.html#.placePlane">placePlane</a></li><li data-type='method'><a href="FindtheAirplane.html#.resetGame">resetGame</a></li><li data-type='method'><a href="FindtheAirplane.html#.rotatePlaneShape">rotatePlaneShape</a></li><li data-type='method'><a href="FindtheAirplane.html#.startGame">startGame</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">FindtheAirplane.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import GameState from './GameState.js';
+/**
+ * Connect4.js is a module to model and play "Connect Four" and related games.
+ * https://en.wikipedia.org/wiki/Connect_Four
+ * @namespace FindtheAirplane
+ * @author Jennifer Zhang
+ * @version 1.0.1
+ */
+const FindtheAirplane = Object.create(null);
+
+const gridSize = 10;
+const planes = 3;
+const planeShapes = [
+    [ // Plane shape 1
+        [0, 0, 1, 0, 0],
+        [2, 2, 2, 2, 2],
+        [0, 0, 2, 0, 0],
+        [0, 2, 2, 2, 0],
+        [0, 0, 0, 0, 0]
+    ],
+    [ // Plane shape 2
+        [0, 0, 1, 0, 0],
+        [0, 2, 2, 2, 0],
+        [2, 0, 2, 0, 2],
+        [0, 0, 2, 0, 0],
+        [0, 2, 2, 2, 0]
+    ],
+    [ // Plane shape 3
+        [0, 0, 1, 0, 0],
+        [0, 0, 2, 0, 0],
+        [2, 2, 2, 2, 2],
+        [0, 0, 2, 0, 0],
+        [0, 2, 0, 2, 0]
+    ]
+];
+
+/**
+ * Checks if a plane can be placed on a given grid at a certain position.
+ * @memberof FindtheAirplane
+ * @function
+ * @param {number[][]} grid The grid to place the plane on.
+ * @param {number[][]} planeShape The shape of the plane to place.
+ * @param {number} x The x position to place the plane.
+ * @param {number} y The y position to place the plane.
+ * @returns {boolean} Whether the plane can be placed or not.
+ */
+FindtheAirplane.canPlacePlane = function (grid, planeShape, x, y) {
+    for (var i = 0; i &lt; planeShape.length; i++) {
+        for (var j = 0; j &lt; planeShape[i].length; j++) {
+            if (planeShape[i][j] !== 0 &amp;&amp; (x+i >= gridSize || y+j >= gridSize || grid[x+i][y+j] !== 0)) {
+                return false;
+            }
+        }
+    }
+    return true;
+};
+
+/**
+ * Rotates a plane shape 90 degrees clockwise.
+ * @memberof FindtheAirplane
+ * @function
+ * @param {number[][]} planeShape The shape of the plane to rotate.
+ * @returns {number[][]} The rotated plane shape.
+ */
+FindtheAirplane.rotatePlaneShape = function (planeShape) {
+    const size = planeShape.length;
+    const newShape = Array.from({ length: size }, () => Array(size).fill(0));
+    for (let i = 0; i &lt; size; i++) {
+        for (let j = 0; j &lt; size; j++) {
+            newShape[j][size - 1 - i] = planeShape[i][j];
+        }
+    }
+    return newShape;
+};
+
+/**
+ * Places a plane on a grid.
+ * @memberof FindtheAirplane
+ * @function
+ * @param {number[][]} grid The grid to place the plane on.
+ * @param {number[][]} planeShape The shape of the plane to place.
+ */
+FindtheAirplane.placePlane = function (grid, planeShape) {
+    if (Math.random() > 0.5) {
+        planeShape = FindtheAirplane.rotatePlaneShape(planeShape);
+    }
+
+    var x, y;
+    do {
+        x = Math.floor(Math.random() * (gridSize - planeShape.length + 1));
+        y = Math.floor(Math.random() * (gridSize - planeShape[0].length + 1));
+    } while (!FindtheAirplane.canPlacePlane(grid, planeShape, x, y));
+    for (var i = 0; i &lt; planeShape.length; i++) {
+        for (var j = 0; j &lt; planeShape[i].length; j++) {
+            if (planeShape[i][j] !== 0) {
+                grid[x+i][y+j] = planeShape[i][j];
+            }
+        }
+    }
+};
+
+/**
+ * Starts a new game for a player.
+ * @memberof FindtheAirplane
+ * @function
+ * @param {number} player The player to start a game for.
+ * @returns {number[][]} The new grid for the player.
+ */
+FindtheAirplane.startGame = function (player, displaygrid) {
+    console.log(`Starting game for player: ${player}`);  
+    if (!GameState.grids[player].length) { // Check if player's grid is empty
+        GameState.grids[player] = Array(gridSize).fill().map(() => Array(gridSize).fill(0)); // Initialize player's grid
+        for (var p = 0; p &lt; planes; p++) {
+            FindtheAirplane.placePlane(GameState.grids[player], planeShapes[p]);
+        }
+        console.log(`Calling callback for player ${player}`);  
+        displaygrid(player);
+    } else {
+        console.log(`Grid already exists for player ${player}`); 
+    }
+    if (GameState.grids[0].length &amp;&amp; GameState.grids[1].length) {
+        GameState.gameRunning = true;
+        console.log("Game is now running");  
+    } else {
+        console.log("Game is not yet running");  
+    }
+};
+
+
+
+/**
+ * Resets the game.
+ * @memberof FindtheAirplane
+ * @function
+ * @returns {number[][][]} The reset grids for both players.
+ */
+FindtheAirplane.resetGame = function (callback) {
+    GameState.currentPlayer = 0;
+    GameState.planeHeadsFound = [0, 0];
+    GameState.grids = [];
+    for (let player = 0; player &lt; 2; player++) {
+        FindtheAirplane.startGame(player, callback);
+    }
+};
+
+
+
+export default FindtheAirplane;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a> on Thu Jun 22 2023 18:55:32 GMT+0100 (英国夏令时间) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

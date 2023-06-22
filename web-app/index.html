@@ -1,0 +1,140 @@
+<!-- In HTML Comments are written like this -->
+<!-- They can all be removed for your apps -->
+<!doctype html> <!-- This first line tells browsers to expect modern standard html 5 -->
+<html lang="en-gb"> <!-- This is indicates the page is written in British English, useful for accessibility -->
+<meta charset="utf-8"> <!-- This indicates how the file is encoded. utf-8 is standard -->
+<title>FindtheAirplane</title> <!-- All pages need a title, this will be displayed in the browser's title bar -->
+<link rel="stylesheet" href="default.css"> <!-- Import style sheet – default.css -->
+ <!-- Import 'Favorites Icon' – favicon.png -->
+ <script type="module" src="main.js"></script> <!-- Load the main script. Must be type="module". Have only one of these -->
+
+ 
+<header>
+    <h1 id="title">Find The Airplane</h1>
+    <a id = "API" href = "/docs/">API Documentation</a>
+</header>
+
+<body>
+    <div id="plane-display">
+        <h2>Plane 1</h2>
+        <div class="plane" id="plane1">
+            <div class="plane">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="head"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                
+                <div class="body"></div>
+                <div class="body"></div>
+                <div class="body"></div>
+                <div class="body"></div>
+                <div class="body"></div>
+                
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="body"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                
+                <div class="cell"></div>
+                <div class="body"></div>
+                <div class="body"></div>
+                <div class="body"></div>
+                <div class="cell"></div>
+                
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>            
+        </div>
+        <h2>Plane 2</h2>
+        <div class="plane" id="plane2">
+            <div class="plane">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="head"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                
+                <div class="cell"></div>
+                <div class="body"></div>
+                <div class="body"></div>
+                <div class="body"></div>
+                <div class="cell"></div>
+                
+                <div class="body"></div>
+                <div class="cell"></div>
+                <div class="body"></div>
+                <div class="cell"></div>
+                <div class="body"></div>
+                
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="body"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                
+                <div class="cell"></div>
+                <div class="body"></div>
+                <div class="body"></div>
+                <div class="body"></div>
+                <div class="cell"></div>
+            </div>            
+        </div>
+        <h2>Plane 3</h2>
+        <div class="plane" id="plane3">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="head"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="body"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+
+                <div class="body"></div>
+                <div class="body"></div>
+                <div class="body"></div>
+                <div class="body"></div>
+                <div class="body"></div>
+
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="body"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+
+                <div class="cell"></div>
+                <div class="body"></div>
+                <div class="cell"></div>
+                <div class="body"></div>
+                <div class="cell"></div>
+        </div>
+    </div>
+    <div id="game-board">
+        <div id="player1-grid" class="grid"></div>
+        <div id="player2-grid" class="grid"></div>
+    </div>    
+    <div id="player1-ready" class="ready-button left">
+        <button id="ready-button1">Player 1 Ready</button>
+    </div>
+    <div id="player2-ready" class="ready-button right">
+        <button id="ready-button2">Player 2 Ready</button>
+    </div>
+    <div id="win-overlay" class="hidden">
+        <div class="overlay-content">
+            <p id="win-message"></p>
+            <button id="overlay-close">Close</button>
+        </div>
+    </div>    
+    <button id="play-again-button" class="hidden">Play Again</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ramda/0.27.1/ramda.min.js"></script>
+    <script src="FindtheAirplane.test.js" type="module"></script>
+</body>
+</html>
